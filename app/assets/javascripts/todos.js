@@ -38,8 +38,8 @@ function updateCounters() {
   $("#todo-count").html($(".todo").length - $(".completed").length);
 }
 
-function createTodo(title) {
-  var newTodo = { title: title, completed: false };
+function createTodo(item) {
+  var newTodo = { item: item, completed: false };
 
   $.ajax({
     type: "POST",
@@ -69,7 +69,7 @@ function createTodo(title) {
 
       var label = $('<label></label>');
       label.attr('for', checkboxId);
-      label.html(data.title);
+      label.html(data.item);
 
       listItem.append(checkbox);
       listItem.append(space);
@@ -83,13 +83,13 @@ function createTodo(title) {
     .fail(function(error) {
       console.log(error);
 
-      error_message = error.responseJSON.title[0];
+      error_message = error.responseJSON.item[0];
       showError(error_message);
     });
 }
 
 function showError(message) {
-  $("#todo_title").addClass("error");
+  $("#todo_item").addClass("error");
   var errorElement = $("<small></small>")
     .attr("id", "error_message")
     .addClass("error")
@@ -99,14 +99,14 @@ function showError(message) {
 
 function resetErrors() {
   $("#error_message").remove();
-  $("#todo_title").removeClass("error");
+  $("#todo_item").removeClass("error");
 }
 
 function submitTodo(event) {
   event.preventDefault();
   resetErrors();
-  createTodo($("#todo_title").val());
-  $("#todo_title").val(null);
+  createTodo($("#todo_item").val());
+  $("#todo_item").val(null);
   updateCounters();
 }
 
