@@ -6,5 +6,6 @@ RSpec.describe TodosController, type: :routing do
     it "routes to #index" do
       expect(:get => "/").to route_to("todos#index")
     end
+
   end
 end
