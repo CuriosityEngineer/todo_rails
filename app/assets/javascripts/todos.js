@@ -14,11 +14,6 @@ function toggleDone() {
     contentType: "application/json",
     dataType: "json"})
 
-    .fail(function(error) {
-      console.log(error);
-      alert("Uh oh! Could not change the completed state of this todo!");
-    })
-
     .done(function(data) {
       console.log(data);
 
@@ -83,28 +78,23 @@ function createTodo(item) {
     .fail(function(error) {
       console.log(error);
 
-      error_message = error.responseJSON.item[0];
-      showError(error_message);
+      error_messsage = error.responseJSON.item[0];
+      showError(error_messsage);
     });
 }
 
 function showError(message) {
   $("#todo_item").addClass("error");
-  var errorElement = $("<small></small>")
-    .attr("id", "error_message")
-    .addClass("error")
-    .html(message);
-  $(errorElement).appendTo('form .field');
-}
 
-function resetErrors() {
-  $("#error_message").remove();
-  $("#todo_item").removeClass("error");
+  var errorElement = $("<small></small>")
+    .addClass('error')
+    .html(message);
+
+  $(errorElement).appendTo('form .field');
 }
 
 function submitTodo(event) {
   event.preventDefault();
-  resetErrors();
   createTodo($("#todo_item").val());
   $("#todo_item").val(null);
   updateCounters();
@@ -124,7 +114,7 @@ function cleanUpDoneTodos(event) {
 function deleteTodo(todoId) {
   $.ajax({
     type: "DELETE",
-    url: "/todos/" + todoId + ".json",
+    url: "/todos/" + todoId,
     contentType: "application/json",
     dataType: "json"})
 
