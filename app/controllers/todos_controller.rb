@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [:update]
+  before_action :set_todo, only: [:update, :destroy]
 
   # GET /todos
   # GET /todos.json
