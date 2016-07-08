@@ -50,6 +50,9 @@ function createTodo(item) {
     contentType: "application/json",
     dataType: "json"})
 
+    .fail(function(error) {
+    console.log(error);
+
     .done(function(data) {
       console.log(data);
 
